@@ -45,22 +45,22 @@
             <StackLayout Orientation="Horizontal"
                          Grid.Row="2"
                          HorizontalOptions="Center">
-                <sfButton:SfButton x:Name="ButtonOne"
+                <sfButton:SfButton 
                                    Grid.Row="2"
                                    Text="++"
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"
                                    Style="{StaticResource ButtonProceedStyle}"
-                                   Clicked="ButtonOne_Clicked"
+                                   Command="{Binding IncrementCommand}"
                                    CommandParameter="1" />
 
-                <sfButton:SfButton x:Name="ButtonTwo"
+                <sfButton:SfButton
                                    Grid.Row="2"
                                    Text="+= 2"
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"
                                    Style="{StaticResource ButtonCounterStyle}"
-                                   Clicked="ButtonTwo_Clicked"
+                                   Command="{Binding IncrementCommand}"
                                    CommandParameter="2" />
 
                 <Label x:Name="LabelCount"

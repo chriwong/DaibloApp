@@ -22,34 +22,23 @@ namespace DiabloApp.Views
                 }
             }
         }
-        //public ICommand IncrementCommand { get; }   // you can't set default values for non-static fields; they must be set in the ctor
+        public ICommand IncrementCommand { get; }   // you can't set default values for non-static fields; they must be set in the ctor
 
         public LandingPage()
         {
             InitializeComponent();
             this.ImageLanding.Source = ImageSource.FromResource("DiabloApp.Assets.LandingBackground.jpg");
-            //this.IncrementCommand = new Command<int>(this.IncrementCounter);
+            this.IncrementCommand = new Command<string>(this.IncrementCounter);
             this.BindingContext = this;
         }
 
-        //private void IncrementCounter(int n)
-        //{
-        //    this._count += n;
-        //    this._count++;
-        //    this.CounterText = $"Count: {this._count}";
-        //}
+        private void IncrementCounter(string s)
+        {
+            System.Console.WriteLine($"\nIncrementing by {s}, which is a: {s.GetType().FullName}\n");
+            int n = int.Parse(s);
+            this._count += n;
+            this.CounterText = $"Count: {this._count}";
+        }
 
-        private void ButtonOne_Clicked(object sender, System.EventArgs e)
-        {
-            System.Console.WriteLine("\n\nButton 1 clicked\n\n");
-            this._count++;
-            this.CounterText = $"Count: {this._count}";
-        }
-        private void ButtonTwo_Clicked(object sender, System.EventArgs e)
-        {
-            System.Console.WriteLine("\n\nButton 2 clicked\n\n");
-            this._count += 2;
-            this.CounterText = $"Count: {this._count}";
-        }
     }
 }
