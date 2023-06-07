@@ -4,22 +4,29 @@
              xmlns:sfButton="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              x:Class="DiabloApp.Views.LandingPage">
     <ContentPage.Resources>
-        <Style x:Key="HeaderText"
+        <Style x:Key="HeaderTextStyle"
                TargetType="Label">
             <Setter Property="FontSize"
                     Value="Large" />
             <Setter Property="TextColor"
                     Value="White" />
         </Style>
-        <Style x:Key="ProceedButton"
+        <Style x:Key="ButtonProceedStyle"
                TargetType="sfButton:SfButton">
             <Setter Property="BackgroundColor"
                     Value="Maroon" />
             <Setter Property="FontSize"
                     Value="Body" />
         </Style>
+        <Style x:Key="ButtonCounterStyle"
+               TargetType="sfButton:SfButton">
+            <Setter Property="BackgroundColor"
+                    Value="DarkGreen" />
+            <Setter Property="FontSize"
+                    Value="Body" />
+        </Style>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
         <Grid RowDefinitions="*, 3*, *"
               ColumnDefinitions="*"
@@ -29,19 +36,42 @@
                    Text="Diablo 4 Campaign"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
-                   Style="{StaticResource HeaderText}"/>
+                   Style="{StaticResource HeaderTextStyle}" />
 
-            <Image x:Name="LandingImage"
+            <Image x:Name="ImageLanding"
                    Grid.Row="1"
                    HeightRequest="300" />
-            
-            <sfButton:SfButton x:Name="ProceedButton"
-                               Grid.Row="2"
-                               Text="Proceed"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center"
-                               Style="{StaticResource ProceedButton}"
-                               Clicked="ProceedButton_Clicked"/>
+
+            <StackLayout Orientation="Horizontal"
+                         Grid.Row="2"
+                         HorizontalOptions="Center">
+                <sfButton:SfButton x:Name="ButtonOne"
+                                   Grid.Row="2"
+                                   Text="++"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   Style="{StaticResource ButtonProceedStyle}"
+                                   Clicked="ButtonOne_Clicked"
+                                   CommandParameter="1" />
+
+                <sfButton:SfButton x:Name="ButtonTwo"
+                                   Grid.Row="2"
+                                   Text="+= 2"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   Style="{StaticResource ButtonCounterStyle}"
+                                   Clicked="ButtonTwo_Clicked"
+                                   CommandParameter="2" />
+
+                <Label x:Name="LabelCount"
+                       Grid.Row="2"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       TextColor="White"
+                       FontSize="Body"
+                       Text="{Binding CounterText}" />
+            </StackLayout>
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>
