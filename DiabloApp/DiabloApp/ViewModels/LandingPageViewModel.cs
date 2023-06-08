@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
@@ -6,27 +8,18 @@ using Xamarin.Forms;
 
 namespace DiabloApp.ViewModels
 {
-    public class LandingPageViewModel : BindableObject
+    public class LandingPageViewModel : ReactiveObject
     {
         private int _count = 1;
-        private string _counterText = "Click me to count up from 1!";
-        public string CounterText
-        {
-            get { return _counterText; }
-            set
-            {
-                if (_counterText != value)
-                {
-                    System.Console.WriteLine("\n\nProperty changed\n\n");
-                    _counterText = value;
-                    OnPropertyChanged(nameof(CounterText));
-                }
-            }
-        }
+        
+        [Reactive]
+        public string CounterText { get; set; }
+
         public ICommand IncrementCommand { get; }   // you can't set default values for non-static fields; they must be set in the ctor
 
         public LandingPageViewModel()
         {
+            this.CounterText = "Click to count!";
             this.IncrementCommand = new Command<string>(this.IncrementCounter);
         }
 
@@ -37,4 +30,5 @@ namespace DiabloApp.ViewModels
             this.CounterText = $"Count: {this._count}";
         }
     }
+
 }
