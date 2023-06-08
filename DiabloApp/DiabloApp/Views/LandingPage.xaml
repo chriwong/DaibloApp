@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sfButton="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             x:Class="DiabloApp.Views.LandingPage">
+    <ContentPage.Resources>
+        <Style x:Key="HeaderText"
+               TargetType="Label">
+            <Setter Property="FontSize"
+                    Value="Large" />
+            <Setter Property="TextColor"
+                    Value="White" />
+        </Style>
+        <Style x:Key="ProceedButton"
+               TargetType="sfButton:SfButton">
+            <Setter Property="BackgroundColor"
+                    Value="Maroon" />
+            <Setter Property="FontSize"
+                    Value="Body" />
+        </Style>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid RowDefinitions="*, 3*, *"
+              ColumnDefinitions="*"
+              BackgroundColor="Black">
+
+            <Label Grid.Row="0"
+                   Text="Diablo 4 Campaign"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Style="{StaticResource HeaderText}"/>
+
+            <Image x:Name="LandingImage"
+                   Grid.Row="1"
+                   HeightRequest="300" />
+            
+            <sfButton:SfButton x:Name="ProceedButton"
+                               Grid.Row="2"
+                               Text="Proceed"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Style="{StaticResource ProceedButton}"
+                               Clicked="ProceedButton_Clicked"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
