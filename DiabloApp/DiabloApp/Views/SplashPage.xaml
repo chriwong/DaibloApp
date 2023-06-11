@@ -3,69 +3,62 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:sfButton="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              xmlns:viewmodels="clr-namespace:DiabloApp.ViewModels"
-             x:Class="DiabloApp.Views.LandingPage"
-             x:DataType="viewmodels:LandingPageViewModel">
+             x:Class="DiabloApp.Views.SplashPage"
+             x:DataType="viewmodels:SplashPageViewModel">
     <ContentPage.Resources>
         <Style x:Key="HeaderTextStyle"
                TargetType="Label">
-            <Setter Property="FontSize"
-                    Value="Large" />
-            <Setter Property="TextColor"
-                    Value="White" />
+            <Setter Property="FontSize" Value="Large" />
+            <Setter Property="TextColor" Value="White" />
+        </Style>
+        <Style x:Key="ButtonCoutOneStyle"
+               TargetType="sfButton:SfButton">
+            <Setter Property="BackgroundColor" Value="Maroon" />
+            <Setter Property="FontSize" Value="Body" />
+        </Style>
+        <Style x:Key="ButtonCoutTwoStyle"
+               TargetType="sfButton:SfButton">
+            <Setter Property="BackgroundColor" Value="DarkGreen" />
+            <Setter Property="FontSize" Value="Body" />
         </Style>
         <Style x:Key="ButtonProceedStyle"
                TargetType="sfButton:SfButton">
-            <Setter Property="BackgroundColor"
-                    Value="Maroon" />
-            <Setter Property="FontSize"
-                    Value="Body" />
-        </Style>
-        <Style x:Key="ButtonCounterStyle"
-               TargetType="sfButton:SfButton">
-            <Setter Property="BackgroundColor"
-                    Value="DarkGreen" />
-            <Setter Property="FontSize"
-                    Value="Body" />
+            <Setter Property="BackgroundColor" Value="Navy" />
+            <Setter Property="FontSize" Value="Body" />
         </Style>
     </ContentPage.Resources>
 
-    <ContentPage.BindingContext>
-        <viewmodels:LandingPageViewModel />
-    </ContentPage.BindingContext>
-    
     <ContentPage.Content>
-        <Grid RowDefinitions="*, 3*, *"
+        <Grid RowDefinitions="*, 3*, *, *"
               ColumnDefinitions="*"
               BackgroundColor="Black">
 
             <Label Grid.Row="0"
-                   Text="Diablo 4 Campaign"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
+                   Text="Diablo 4 Campaign"
                    Style="{StaticResource HeaderTextStyle}" />
 
-            <Image x:Name="ImageLanding"
+            <Image x:Name="ImageSplash"
                    Grid.Row="1"
                    HeightRequest="300" />
 
-            <StackLayout Orientation="Horizontal"
-                         Grid.Row="2"
-                         HorizontalOptions="Center">
-                <sfButton:SfButton 
-                                   Grid.Row="2"
-                                   Text="++"
+            <StackLayout Grid.Row="2"
+                         HorizontalOptions="Center"
+                         Orientation="Horizontal">
+                <sfButton:SfButton Grid.Row="2"
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"
-                                   Style="{StaticResource ButtonProceedStyle}"
+                                   Text="++"
+                                   Style="{StaticResource ButtonCoutOneStyle}"
                                    Command="{Binding IncrementCommand}"
                                    CommandParameter="1" />
 
-                <sfButton:SfButton
-                                   Grid.Row="2"
-                                   Text="+= 2"
+                <sfButton:SfButton Grid.Row="2"
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"
-                                   Style="{StaticResource ButtonCounterStyle}"
+                                   Text="+= 2"
+                                   Style="{StaticResource ButtonCoutTwoStyle}"
                                    Command="{Binding IncrementCommand}"
                                    CommandParameter="2" />
 
@@ -78,6 +71,12 @@
                        Text="{Binding CounterText}" />
             </StackLayout>
 
+            <sfButton:SfButton Grid.Row="3"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Text="Proceed"
+                               Style="{StaticResource ButtonProceedStyle}"
+                               Command="{Binding ProceedToHomeCommand}" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

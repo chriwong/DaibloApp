@@ -1,0 +1,49 @@
+{
+    "classes": [
+        {
+            "name": "Barbarian",
+            "description": "The Barbarian has unparalleled strength and expertly wields an entire arsenal in battle, with a weapon for every occasion. He bellows intimidating war cries and unleashes ground-shaking slams to send approaching hordes reeling.",
+            "specialties": [
+                "spinning"
+            ]
+        },
+        {
+            "name": "Necromancer",
+            "description": "The Druid is a savage shapeshifter, fluidly transforming between the forms of a towering bear or a vicious werewolf to fight alongside the creatures of the wild. He also commands the power of earth, wind, and storm, unleashing nature’s wrath to devastating effect.",
+            "specialties": [
+                "Blood",
+                "Bones",
+                "Shadow"
+            ]
+        },
+        {
+            "name": "Sorcerer",
+            "description": "The Sorcerer shapes the elements into whatever form is necessary to ensure victory, from hurling bolts of lightning, impaling her foes upon jagged spikes of ice, and raining flaming meteors down from the sky.",
+            "specialties": [
+                "Fire Magic",
+                "Ice Magic",
+                "Lightning Magic"
+            ]
+        },
+        {
+            "name": "Rogue",
+            "description": "The Rogue is an adaptable, agile warrior who can specialize in ranged or close quarters combat. She can best any foe with her imbued weapons, perform powerful combo attacks, and can augment her arsenal with deadly poisons and shadow magic to slay demons with impunity.",
+            "specialties": [
+                "Archery",
+                "CQC",
+                "Poison"
+            ]
+        },
+        {
+            "name": "Druid",
+            "description": "The Druid is a savage shapeshifter, fluidly transforming between the forms of a towering bear or a vicious werewolf to fight alongside the creatures of the wild. He also commands the power of earth, wind, and storm, unleashing nature’s wrath to devastating effect.",
+            "specialties": [
+                "Werewolf",
+                "Bear",
+                "Earth Magic",
+                "Wind Magic",
+                "Storm Magic"
+            ]
+        }
+    ]
+}

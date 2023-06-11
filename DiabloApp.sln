@@ -7,7 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloApp.Android", "Diablo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloApp.iOS", "DiabloApp\DiabloApp.iOS\DiabloApp.iOS.csproj", "{0867433F-6633-49A5-B59E-5D6C888614B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloApp", "DiabloApp\DiabloApp\DiabloApp.csproj", "{03CF3513-E570-4A62-B43C-4EE5C5A9410E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiabloApp", "DiabloApp\DiabloApp\DiabloApp.csproj", "{03CF3513-E570-4A62-B43C-4EE5C5A9410E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B5B8496F-8175-4F42-9C9F-C00D3D25D71C}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

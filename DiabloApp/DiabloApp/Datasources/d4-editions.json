@@ -1,0 +1,40 @@
+{
+    "editions": [
+        {
+            "name": "Standard",
+            "Caparison of Faith Mount Armor": true,
+            "Diablo® III Inarius Wings & Inarius Murloc Pet": true,
+            "World of Warcraft® Amalgam of Rage Mount": true,
+            "Diablo Immortal® Umber Winged Darkness Cosmetics Set": true,
+            "Temptation Mount": false,
+            "Hellborn Carapace Mount Armor": false,
+            "Premium Seasonal Battle Pass Unlock": false,
+            "Accelerated Seasonal Battle Pass Unlock": false,
+            "Wings of the Creator​ Emote": false
+        },
+        {
+            "name": "Digital Deluxe",
+            "Caparison of Faith Mount Armor": true,
+            "Diablo® III Inarius Wings & Inarius Murloc Pet": true,
+            "World of Warcraft® Amalgam of Rage Mount": true,
+            "Diablo Immortal® Umber Winged Darkness Cosmetics Set": true,
+            "Temptation Mount": true,
+            "Hellborn Carapace Mount Armor": true,
+            "Premium Seasonal Battle Pass Unlock": true,
+            "Accelerated Seasonal Battle Pass Unlock": false,
+            "Wings of the Creator Emote": false
+        },
+        {
+            "name": "Ultimate",
+            "Caparison of Faith Mount Armor": true,
+            "Diablo® III Inarius Wings & Inarius Murloc Pet": true,
+            "World of Warcraft® Amalgam of Rage Mount": true,
+            "Diablo Immortal® Umber Winged Darkness Cosmetics Set": true,
+            "Temptation Mount": true,
+            "Hellborn Carapace Mount Armor": true,
+            "Premium Seasonal Battle Pass Unlock": true,
+            "Accelerated Seasonal Battle Pass Unlock": true,
+            "Wings of the Creator​ Emote": true
+        }
+    ]
+}
