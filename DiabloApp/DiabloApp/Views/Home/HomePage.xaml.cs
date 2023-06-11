@@ -15,7 +15,7 @@ namespace DiabloApp.Views.Home
         public HomePage()
         {
             InitializeComponent();
-            FlyoutPage.ListView.ItemSelected += ListView_ItemSelected;
+            this.HomeFlyout.ListView.ItemSelected += ListView_ItemSelected;
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -30,7 +30,7 @@ namespace DiabloApp.Views.Home
             Detail = new NavigationPage(page);
             IsPresented = false;
 
-            FlyoutPage.ListView.SelectedItem = null;
+            this.HomeFlyout.ListView.SelectedItem = null;
         }
     }
 }

@@ -4,7 +4,7 @@
             xmlns:homeViews="clr-namespace:DiabloApp.Views.Home"
             x:Class="DiabloApp.Views.Home.HomePage">
     <FlyoutPage.Flyout>
-        <homeViews:HomeFlyout x:Name="FlyoutPage" />
+        <homeViews:HomeFlyout x:Name="HomeFlyout" />
     </FlyoutPage.Flyout>
     
     <FlyoutPage.Detail>
