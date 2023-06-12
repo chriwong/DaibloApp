@@ -32,6 +32,10 @@
 		<PackageReference Include="ReactiveUI.Events.XamForms" Version="15.1.1" />
 		<PackageReference Include="ReactiveUI.Fody" Version="18.4.25" />
 		<PackageReference Include="ReactiveUI.XamForms" Version="18.4.25" />
+		<PackageReference Include="DynamicData" Version="7.13.1" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+		<PackageReference Include="Polly" Version="7.2.3" />
+		<!-- Syncfusion -->
 		<PackageReference Include="Syncfusion.Xamarin.Buttons" Version="20.4.0.48" />
 		<PackageReference Include="Syncfusion.Xamarin.Calculate" Version="20.4.0.48" />
 		<PackageReference Include="Syncfusion.Xamarin.Cards" Version="20.4.0.48" />

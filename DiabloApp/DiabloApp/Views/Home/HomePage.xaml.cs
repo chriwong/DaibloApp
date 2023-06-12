@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DiabloApp.Models;
+using System;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,22 +12,22 @@ namespace DiabloApp.Views.Home
         public HomePage()
         {
             InitializeComponent();
-            this.HomeFlyout.ListView.ItemSelected += ListView_ItemSelected;
+            this.FlyoutMenu.ListView.ItemSelected += ListView_ItemSelected;
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var item = e.SelectedItem as HomeFlyoutMenuItem;
-            if (item == null)
-                return;
+            if (!(e.SelectedItem is FlyoutMenuItem item))
+            {
+                 return;
+            }
 
-            var page = (Page)Activator.CreateInstance(item.TargetType);
+            Page page = Activator.CreateInstance(item.TargetType) as Page;
             page.Title = item.Title;
 
-            Detail = new NavigationPage(page);
-            IsPresented = false;
-
-            this.HomeFlyout.ListView.SelectedItem = null;
+            this.Detail = new NavigationPage(page);
+            this.IsPresented = false;
+            this.FlyoutMenu.ListView.SelectedItem = null;
         }
     }
 }

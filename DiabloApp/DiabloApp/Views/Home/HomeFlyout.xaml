@@ -1,8 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:homeViewModels="clr-namespace:DiabloApp.ViewModels.Home"
+             xmlns:models="clr-namespace:DiabloApp.Models"
              x:Class="DiabloApp.Views.Home.HomeFlyout"
-             Title="Menu">
+             x:DataType="homeViewModels:HomeFlyoutViewModel"
+             Title="HomeFlyout">
+    <ContentPage.Resources>
+        <Style TargetType="Label" x:Key="HeaderStyle">
+            <Setter Property="FontSize" Value="Large" />
+            <Setter Property="TextColor" Value="White" />
+        </Style>
+    </ContentPage.Resources>
     <StackLayout>
         <ListView x:Name="MenuItemsListView"
                   SeparatorVisibility="None"
@@ -21,19 +30,23 @@
                     </Grid.RowDefinitions>
                     <Label Grid.Row="2"
                            Grid.Column="1"
-                           Text="AppName"
-                           Style="{DynamicResource SubtitleStyle}" />
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           Text="{Binding MenuTitle}"
+                           TextColor="Black"
+                           FontSize="Title" />
                 </Grid>
             </ListView.Header>
 
             <ListView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="models:FlyoutMenuItem">
                     <ViewCell>
                         <StackLayout HorizontalOptions="FillAndExpand"
                                      Padding="15,10">
                             <Label VerticalOptions="FillAndExpand"
                                    VerticalTextAlignment="Center"
                                    Text="{Binding Title}"
+                                   TextColor="Black"
                                    FontSize="Large" />
                         </StackLayout>
                     </ViewCell>

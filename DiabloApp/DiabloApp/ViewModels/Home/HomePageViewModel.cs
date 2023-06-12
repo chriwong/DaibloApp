@@ -1,8 +1,5 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DiabloApp.ViewModels.Home
 {
@@ -13,7 +10,7 @@ namespace DiabloApp.ViewModels.Home
 
         public HomePageViewModel()
         {
-            FlyoutHeader = "Welcome to Sanctuary";
+            this.FlyoutHeader = "Welcome to Sanctuary";
         }
     }
 }

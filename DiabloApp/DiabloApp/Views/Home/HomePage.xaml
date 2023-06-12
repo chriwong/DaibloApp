@@ -4,9 +4,9 @@
             xmlns:homeViews="clr-namespace:DiabloApp.Views.Home"
             x:Class="DiabloApp.Views.Home.HomePage">
     <FlyoutPage.Flyout>
-        <homeViews:HomeFlyout x:Name="HomeFlyout" />
+        <homeViews:HomeFlyout x:Name="FlyoutMenu" />
     </FlyoutPage.Flyout>
-    
+
     <FlyoutPage.Detail>
         <NavigationPage>
             <x:Arguments>

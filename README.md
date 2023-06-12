@@ -103,6 +103,11 @@ public string Name { get; set; }
 ```
 <br />
 
+## Actually binding
+All of our viewmodels extend from `ReactiveUI.ReactiveObject`.
+The [intro](https://www.reactiveui.net/docs/handbook/data-binding/) and [Xamarin Forms](https://www.reactiveui.net/docs/handbook/data-binding/xamarin-forms) docpages have more info.
+
+
 # Navigation
 We use [Prism](https://prismlibrary.com/docs/xamarin-forms/navigation/navigation-basics.html) for navigation.
 There's a three-step (plus some setup) process for getting started:
