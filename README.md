@@ -11,7 +11,9 @@ public interface INotifyPropertyChanged
 }
 ```
 
-In the most raw form, you could create the event handler yourself and run it at the appropriate time:
+Frameworks that support binding (e.g. Xamarin Forms) have a binding class that hooks into/provides the implementation of the event. So when you fulfill your side of the interface by triggering the event, what you're actually doing is running the binding class' method that (probably) updates relevant UI elements/views.
+
+In the most raw form, you could create trigger the event at the appropriate time:
 ```c#
 public class MyClassThatNotifiesOthers
 {
