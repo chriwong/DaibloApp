@@ -1,6 +1,6 @@
 # Binding
 
-## Absolute Vanilla .NET
+## Setting things up and background reading
 Objects that want to notify other parts of the system when their properties change must implement [`INotifyPropertyChanged`](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.inotifypropertychanged?view=net-7.0).
 `INotifyPropertyChanged` look like:
 ```c#
@@ -70,7 +70,7 @@ public class MyViewModel : BindableObject
 ```
 <br />
 
-## Ok Xamarin provides an implementation of `INotifyProperyChanged`, so why do we use Prism and/or ReactiveUI?
+### Ok Xamarin provides an implementation of `INotifyProperyChanged`, so why do we use Prism and/or ReactiveUI?
 [Prism](https://prismlibrary.com/docs), [ReactiveUI](https://github.com/reactiveui/ReactiveUI), and [MVVMHelpers](https://github.com/jamesmontemagno/mvvm-helpers) all offer their own base classes that implement `INotifyProperyChanged`.
 Each also comes with more OOTB features, but they are very similar in how they go about `INotifyProperyChanged` implementation.
 
@@ -81,7 +81,7 @@ Each also comes with more OOTB features, but they are very similar in how they g
 |Prism|`BindableBase`|`SetProperty()`|
 <br />
 
-## Alright, but what's this `[Reactive]` attribute on all the bound-to properties?
+### Alright, but what's this `[Reactive]` attribute on all the bound-to properties?
 This is a [Fody](https://github.com/Fody/Home) thing.
 Specifically the ["Reactive"](https://github.com/Fody/Home/blob/master/pages/addins.md#addins-list) add-in for Fody.
 Fody is an extensible tool for weaving .NET assemblies, and they'll inject INotifyPropertyChanged code into properties at compile time for you.
@@ -103,16 +103,68 @@ public string Name { get; set; }
 ```
 <br />
 
-## Actually binding
+## Vanilla Xamarin.Forms binding
+* [Microsoft Learn chapters about binding](https://learn.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/data-binding/)
+
+<br />
+
+## View-to-View Binding with Vanilla Xamarin
+* You can bind the properties of a view to the properties of another view in the same page
+    * Microsoft's example is a slider with a label. The text on the label is bound to the value of the slider: if the slider goes up, the text automatically updates to show the value
+* This is usefu/necessary in a `ListView`
+    * The binding context of each item in the list is set to the appropriate element in `ListView.ItemsSource`
+    * If you want each repeated item to reference the same binding context as the `ListView`'s (which is probably the viewmodel of that page), do it like so:
+    * `{Binding Source={x:Reference MyListView}, Path=BindingContext}` is like saying "this binding comes from the 'BindingContext' property of the 'MyListView' view/element"
+    * See [Microsoft's section on this](https://stackoverflow.com/a/40913726/21644376) as well as [this SO answer](https://stackoverflow.com/a/40913726/21644376)
+```xml
+<ListView x:Name="MyListView"
+    ItemsSource="{Binding MyBaseballTeams}">
+    <ListView.ItemTemplate>
+        <DataTemplate>
+            <ViewCell>
+                <Label Text="{Binding TeamName}" />
+                <Button BindingContext="{Binding Source={x:Reference MyListView}, Path=BindingContext}"
+                    Command="{Binding ViewTeamCommand}"
+                    Text="View Info" />
+            </ViewCell>
+        </DataTemplate>
+    </ListView.ItemTemplate>
+</ListView>
+```
+<br />
+
+### Hmm okay, but zoom out a little and I don't see where the `ListView`'s binding context is set to anything...
+* This is where [`ReactiveUI.ContentView<VM>`](https://www.reactiveui.net/api/reactiveui.xamforms/reactivecontentview_1/#reactivecontentview%3Ctviewmodel%3E-class) comes in
+* I _think_ this automagically wires up the view to use the specified viewmodel parameter
+
+<br />
+
+## Binding with `ReactiveUI`
 All of our viewmodels extend from `ReactiveUI.ReactiveObject`.
 The [intro](https://www.reactiveui.net/docs/handbook/data-binding/) and [Xamarin Forms](https://www.reactiveui.net/docs/handbook/data-binding/xamarin-forms) docpages have more info.
+```c#
+this.OneWayBind(ViewModel,
+    viewModel => viewModel.Person.Name,
+    view => view.Name.Text);
+// OR
+this.WhenAnyValue(x => x.ViewModel.Person.Name)
+    .BindTo(this, view => view.Name.Text);
+```
+TODO - make note on `.Bind()` (two-way)
+
+<br />
+
+<br />
+
 
 
 # Navigation
+
+## Prism Navigation
 We use [Prism](https://prismlibrary.com/docs/xamarin-forms/navigation/navigation-basics.html) for navigation.
 There's a three-step (plus some setup) process for getting started:
 
-1) Make `App` extend `Prism.DryIoc.PrismApplication`
+1. Make `App` extend `Prism.DryIoc.PrismApplication`
     * ctors
     * `OnInitialized()` should call `InitializeComponent()` and navigate to first page (maybe revisit this part after setting everything else up)
 ```c#
@@ -130,7 +182,7 @@ public partial class App : Prism.DryIoc.PrismApplication
 }
 ```
 
-2) Register pages that should be navigable
+2. Register pages that should be navigable
     * do this in `App`'s RegisterForNavigation
     * the overload of `RegisterForNavigation<TPage, TViewModel>()` shown below handles setting the binding context of the specified page!
 ```c#
@@ -141,7 +193,7 @@ protected override void RegisterTypes(IContainerRegistry containerRegistry)
 }
 ```
 
-3) Inject an `INavigationService` into whichever viewmodels will be doing navigation:
+3. Inject an `INavigationService` into whichever viewmodels will be doing navigation:
 ```c#
 public class SplashPageViewModel : ReactiveObject
 {
@@ -154,7 +206,7 @@ public class SplashPageViewModel : ReactiveObject
 }
 ```
 
-4) Perform navigation with either relative or absolute paths:
+4. Perform navigation with either relative or absolute paths:
     * kind of important to handle failed navigation - otherwise it fails silently...
 ```c#
 private async void NavigateToHome()
@@ -166,9 +218,80 @@ private async void NavigateToHome()
     }
 }
 ```
+<br />
 
 ## Notes on Prism navigation
 * When registering pages for navigation, you _can_ provide a different key/identifier, but using the page/class name seems better
 * There are two types of navigation paths
     * __Relative__: subsequent navs will create a stack (e.g. `NavigateAsync("SomeView")`)
     * __Absolute__: prefixing a nav with backslash will reset the stack (e.g. `NavigateAsync("/SomeView")`)
+* That's it!
+
+<br />
+<br />
+
+
+
+# Observables
+
+## History Lesson
+Microsoft came out with Reactive Extensions ("ReactiveX") and its initial implementation on .NET. Today, ReactiveX has implementations in most major languages.
+
+Similar to `INotifyPropertyChanged` is [`INotifyCollectionChanged`](https://learn.microsoft.com/en-us/dotnet/api/system.collections.specialized.inotifycollectionchanged). It defines an event that should be raised "when the underlying collection changes".
+The provided implementation is [`ObservableCollection<T>`](https://learn.microsoft.com/en-us/dotnet/api/system.collections.objectmodel.observablecollection-1) which "Represents a dynamic data collection that provides notifications _when items get added or removed, or when the whole list is refreshed_".
+
+The expected behavior might be that if you change a property on an object _in_ the collection, the event would be raised. After all, you are modifying the collection, right? Nope - only collection-related actions (add, remove, clear) trigger the event.
+
+## Enter DynamicData
+[DynamicData](https://dynamic-data.org/) ([Github](https://github.com/reactivemarbles/DynamicData)) does two things:
+1. Raises the `CollectionChanged` event when an item in the collection is changed
+2. "Expose changes to the collection via an observable change set. The resulting observable change sets can be manipulated and transformed using Dynamic Data’s robust and powerful array of change set operators". In other words, a LINQ-like API to take action on observables
+
+Using DynamicData is also a multi-step process:
+1. Define a change set cache (optionally with a unique key selector)
+```c#
+private SourceCache<Tweet, Guid> _tweetCache = new SourceCache<Tweet, Guid>(x => x.UniqueId);
+```
+
+2. Define an ObservableCollection
+```c#
+private readonly ReadOnlyObservableCollection<Tweet> _tweets;
+```
+
+3. Expose the collection with a property
+```c#
+public ReadOnlyObservableCollection<Tweet> Tweets => this._tweets;
+```
+
+4. In the constructor, set up the cache and connect the observable
+```c#
+public TwitterFeedViewModel()
+{
+    IObservable<IChangeSet<Tweet, Guid>> changeSet = this._tweetCache
+        .Connect()
+        .RefCount();
+    
+    changeSet
+        .Bind(out this._tweets)     // step 2
+        .DisposeMany()
+        .Subscribe()
+        .DisposeWith(this.Disposables);
+}
+```
+
+5. Bind a view to the exposed property (either XAML or code-behind):
+```xml
+<ListView
+    x:Name="TweetListView"
+    ItemsSource="{Binding Tweets}">
+</ListView>
+```
+or
+```c#
+public MyTweetView()
+{
+    this.WhenAnyValue(view => view.ViewModel.Tweets)
+        .BindTo(this, view => view.TweetListView.ItemsSource)
+        .DisposeWith(this.Disposables);
+}
+```
